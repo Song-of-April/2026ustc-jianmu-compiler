@@ -105,9 +105,14 @@ class CminusfBuilder : public ASTVisitor {
     Scope scope;
     std::unique_ptr<Module> module;
 
+    Value *cast_to(Value *value, Type *type);
+    Value *truth_value(Value *value);
+    Value *array_element(ASTVar &node, Value *binding);
+
     struct {
         // function that is being built
         Function *func = nullptr;
-        // TODO: you should add more fields to store state
+        bool function_body = false;
+        bool want_address = false;
     } context;
 };
